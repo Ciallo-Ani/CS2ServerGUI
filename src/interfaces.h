@@ -1,22 +1,23 @@
-#include "eiface.h"
+#ifndef __EXTENSION_SERVERGUI_INTERFACES__
+#define __EXTENSION_SERVERGUI_INTERFACES__
 
-class CSchemaSystem;
-class IGameEventManager2;
-class INetworkStringTableContainer;
-class IGameEventSystem;
+class CGameEventSystem;
+class CEngineServer;
+class CCVar;
+class CSource2Server;
 class INetworkMessages;
+class CNetworkServerService;
+class INetworkStringTableContainer;
 
-namespace Interfaces
+namespace Ifaces
 {
+	inline CGameEventSystem* eventSystem = nullptr;
+	inline CEngineServer* engine = nullptr;
+	inline CCVar* cvar = nullptr;
+	inline CSource2Server* server;
+	inline INetworkMessages* networkMessages = nullptr;
+	inline CNetworkServerService* networkService = nullptr;
+	inline INetworkStringTableContainer* networkStringTableContainerServer;
+} // namespace Ifaces
 
-inline IServerGameDLL* server = NULL;
-inline IServerGameClients* gameclients = NULL;
-inline IVEngineServer* engine = NULL;
-inline IGameEventManager2* gameevents = NULL;
-inline ICvar* icvar = NULL;
-inline CSchemaSystem* g_pSchemaSystem2 = NULL;
-inline INetworkStringTableContainer* networkStringTableContainerServer = NULL;
-inline IGameEventSystem* gameEventSystem = NULL;
-inline INetworkMessages* networkMessages = NULL;
-
-} // namespace Interfaces
+#endif

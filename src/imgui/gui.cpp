@@ -28,7 +28,7 @@
 #include "panels/dumper/commandlist/commandlist.h"
 #include "panels/eventlogger/eventlogger.h"
 #include <ImGuiFileDialog.h>
-#include "extension.h"
+#include <server_gui.h>
 
 namespace GUI
 {
@@ -59,7 +59,7 @@ void DrawMainWindow()
 	MenuBar::Draw();
 
 	DrawFileDialogs();
-	DrawWelcomeModal();
+	//DrawWelcomeModal();
 }
 
 void DrawFileDialogs()
@@ -91,10 +91,10 @@ void DrawFileDialogs()
 
 void DrawWelcomeModal()
 {
-	if (!g_CS2ServerGUI.m_config.m_bWelcomeSeen)
+	if (!g_ServerGUI.m_config.m_bWelcomeSeen)
 	{
-		g_CS2ServerGUI.m_config.m_bWelcomeSeen = true;
-		g_CS2ServerGUI.m_config.SaveConfig();
+		g_ServerGUI.m_config.m_bWelcomeSeen = true;
+		g_ServerGUI.m_config.SaveConfig();
 
 		ImGui::OpenPopup("Welcome");
 	}

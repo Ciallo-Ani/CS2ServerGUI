@@ -26,7 +26,8 @@
 #include <vector>
 #include <imgui-notify/ImGuiNotify.hpp>
 #include <ImGuiFileDialog.h>
-#include <nlohmann/json.hpp>
+#include <tools/json.h>
+#include <sdk/tier0/CCvar.h>
 
 #define FCVAR_MISSING5	((uint64_t)1<<(uint64_t)30)
 #define FCVAR_MISSING6	((uint64_t)1<<(uint64_t)31)
@@ -39,40 +40,40 @@ namespace GUI::Dumper::ConVarList
 
 std::string StringifyValue(ConVar* pCvar)
 {
-	auto& value = *pCvar->m_cvvDefaultValue;
+	auto value = pCvar->GetDefault();
 
 	switch (pCvar->m_eVarType)
 	{
-	case EConVarType_Bool:
-		return value.m_bValue ? "true" : "false";
-	case EConVarType_Int16:
-		return std::to_string(value.m_i16Value);
-	case EConVarType_UInt16:
-		return std::to_string(value.m_u16Value);
-	case EConVarType_Int32:
-		return std::to_string(value.m_i32Value);
-	case EConVarType_UInt32:
-		return std::to_string(value.m_u32Value);
-	case EConVarType_Int64:
-		return std::to_string(value.m_i64Value);
-	case EConVarType_UInt64:
-		return std::to_string(value.m_u64Value);
-	case EConVarType_Float32:
-		return std::to_string(std::round(value.m_flValue * 10000.0f) / 10000.0f);
-	case EConVarType_Float64:
-		return std::to_string(value.m_dbValue);
-	case EConVarType_String:
-		return value.m_u64Value ? value.m_szValue : "";
-	case EConVarType_Color:
-		return std::format("{} {} {} {}", value.m_clrValue.r(), value.m_clrValue.g(), value.m_clrValue.b(), value.m_clrValue.a());
-	case EConVarType_Vector2:
-		return std::format("{} {}", value.m_vec2Value.x, value.m_vec2Value.y);
-	case EConVarType_Vector3:
-		return std::format("{} {} {}", value.m_vec3Value.x, value.m_vec3Value.y, value.m_vec3Value.z);
-	case EConVarType_Vector4:
-		return std::format("{} {} {} {}", value.m_vec4Value.x, value.m_vec4Value.y, value.m_vec4Value.z, value.m_vec4Value.w);
-	case EConVarType_Qangle:
-		return std::format("{} {} {}", value.m_angValue.x, value.m_angValue.y, value.m_angValue.z);
+	case ConVarType::Bool:
+		return value->m_bValue ? "true" : "false";
+	/*case ConVarType::Int16:
+		return std::to_string(value->m_i16Value);
+	case ConVarType::UInt16:
+		return std::to_string(value->m_u16Value);*/
+	case ConVarType::Int32:
+		return std::to_string(value->m_i32Value);
+	/*case ConVarType::UInt32:
+		return std::to_string(value->m_u32Value);
+	case ConVarType::Int64:
+		return std::to_string(value->m_i64Value);
+	case ConVarType::UInt64:
+		return std::to_string(value->m_u64Value);*/
+	case ConVarType::Float32:
+		return std::to_string(std::round(value->m_flValue * 10000.0f) / 10000.0f);
+	/*case ConVarType::Float64:
+		return std::to_string(value->m_dbValue);*/
+	case ConVarType::String:
+		return value->m_pszString ? value->m_pszString : "";
+	/*case ConVarType::Color:
+		return std::format("{} {} {} {}", value->m_clrValue.r, value->m_clrValue.g, value->m_clrValue.b, value->m_clrValue.a);
+	case ConVarType::Vector2:
+		return std::format("{} {}", value->m_vec2Value.x, value->m_vec2Value.y);
+	case ConVarType::Vector3:
+		return std::format("{} {} {}", value->m_vec3Value.x, value->m_vec3Value.y, value->m_vec3Value.z);
+	case ConVarType::Vector4:
+		return std::format("{} {} {} {}", value->m_vec4Value.x, value->m_vec4Value.y, value->m_vec4Value.z, value->m_vec4Value.w);
+	case ConVarType::Qangle:
+		return std::format("{} {} {}", value->m_angValue.x, value->m_angValue.y, value->m_angValue.z);*/
 	default:
 		return "Unknown";
 	}
@@ -80,87 +81,87 @@ std::string StringifyValue(ConVar* pCvar)
 
 void ValueToJson(ConVar* pCvar, json& j)
 {
-	auto& value = *pCvar->m_cvvDefaultValue;
+	auto value = pCvar->GetDefault();
 
 	switch (pCvar->m_eVarType)
 	{
-	case EConVarType_Bool:
-		j["default"] = value.m_bValue;
+	case ConVarType::Bool:
+		j["default"] = value->m_bValue;
 		break;
-	case EConVarType_Int16:
-		j["default"] = value.m_i16Value;
-		if(pCvar->m_cvvMinValue)
-			j["min"] = pCvar->m_cvvMinValue->m_i16Value;
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = pCvar->m_cvvMaxValue->m_i16Value;
+	/*case ConVarType::Int16:
+		j["default"] = value->m_i16Value;
+		if(pCvar->m_pMinValue)
+			j["min"] = pCvar->m_pMinValue->m_i16Value;
+		if (pCvar->m_pMaxValue)
+			j["max"] = pCvar->m_pMaxValue->m_i16Value;
 		break;
-	case EConVarType_UInt16:
-		j["default"] = value.m_u16Value;
-		if (pCvar->m_cvvMinValue)
-			j["min"] = pCvar->m_cvvMinValue->m_u16Value;
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = pCvar->m_cvvMaxValue->m_u16Value;
+	case ConVarType::UInt16:
+		j["default"] = value->m_u16Value;
+		if (pCvar->m_pMinValue)
+			j["min"] = pCvar->m_pMinValue->m_u16Value;
+		if (pCvar->m_pMaxValue)
+			j["max"] = pCvar->m_pMaxValue->m_u16Value;
+		break;*/
+	case ConVarType::Int32:
+		j["default"] = value->m_i32Value;
+		if (pCvar->m_pMinValue)
+			j["min"] = pCvar->m_pMinValue->m_i32Value;
+		if (pCvar->m_pMaxValue)
+			j["max"] = pCvar->m_pMaxValue->m_i32Value;
 		break;
-	case EConVarType_Int32:
-		j["default"] = value.m_i32Value;
-		if (pCvar->m_cvvMinValue)
-			j["min"] = pCvar->m_cvvMinValue->m_i32Value;
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = pCvar->m_cvvMaxValue->m_i32Value;
+	/*case ConVarType::UInt32:
+		j["default"] = value->m_u32Value;
+		if (pCvar->m_pMinValue)
+			j["min"] = pCvar->m_pMinValue->m_u32Value;
+		if (pCvar->m_pMaxValue)
+			j["max"] = pCvar->m_pMaxValue->m_u32Value;
 		break;
-	case EConVarType_UInt32:
-		j["default"] = value.m_u32Value;
-		if (pCvar->m_cvvMinValue)
-			j["min"] = pCvar->m_cvvMinValue->m_u32Value;
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = pCvar->m_cvvMaxValue->m_u32Value;
+	case ConVarType::Int64:
+		j["default"] = value->m_i64Value;
+		if (pCvar->m_pMinValue)
+			j["min"] = pCvar->m_pMinValue->m_i64Value;
+		if (pCvar->m_pMaxValue)
+			j["max"] = pCvar->m_pMaxValue->m_i64Value;
 		break;
-	case EConVarType_Int64:
-		j["default"] = value.m_i64Value;
-		if (pCvar->m_cvvMinValue)
-			j["min"] = pCvar->m_cvvMinValue->m_i64Value;
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = pCvar->m_cvvMaxValue->m_i64Value;
+	case ConVarType::UInt64:
+		j["default"] = value->m_u64Value;
+		if (pCvar->m_pMinValue)
+			j["min"] = pCvar->m_pMinValue->m_u64Value;
+		if (pCvar->m_pMaxValue)
+			j["max"] = pCvar->m_pMaxValue->m_u64Value;
+		break;*/
+	case ConVarType::Float32:
+		j["default"] = (json::number_float_t)(round((int)(value->m_flValue * 10000)) / 10000);
+		if (pCvar->m_pMinValue)
+			j["min"] = (json::number_float_t)(round((int)(pCvar->m_pMinValue->m_flValue * 10000)) / 10000);
+		if (pCvar->m_pMaxValue)
+			j["max"] = (json::number_float_t)(round((int)(pCvar->m_pMaxValue->m_flValue * 10000)) / 10000);
 		break;
-	case EConVarType_UInt64:
-		j["default"] = value.m_u64Value;
-		if (pCvar->m_cvvMinValue)
-			j["min"] = pCvar->m_cvvMinValue->m_u64Value;
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = pCvar->m_cvvMaxValue->m_u64Value;
+	/*case ConVarType::Float64:
+		j["default"] = value->m_dbValue;
+		if (pCvar->m_pMinValue)
+			j["min"] = pCvar->m_pMinValue->m_dbValue;
+		if (pCvar->m_pMaxValue)
+			j["max"] = pCvar->m_pMaxValue->m_dbValue;
+		break;*/
+	case ConVarType::String:
+		j["default"] = value->m_pszString ? value->m_pszString : "";
 		break;
-	case EConVarType_Float32:
-		j["default"] = (json::number_float_t)(round((int)(value.m_flValue * 10000)) / 10000);
-		if (pCvar->m_cvvMinValue)
-			j["min"] = (json::number_float_t)(round((int)(pCvar->m_cvvMinValue->m_flValue * 10000)) / 10000);
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = (json::number_float_t)(round((int)(pCvar->m_cvvMaxValue->m_flValue * 10000)) / 10000);
+	/*case ConVarType::Color:
+		j["default"] = { value->m_clrValue.r, value->m_clrValue.g, value->m_clrValue.b, value->m_clrValue.a };
 		break;
-	case EConVarType_Float64:
-		j["default"] = value.m_dbValue;
-		if (pCvar->m_cvvMinValue)
-			j["min"] = pCvar->m_cvvMinValue->m_dbValue;
-		if (pCvar->m_cvvMaxValue)
-			j["max"] = pCvar->m_cvvMaxValue->m_dbValue;
+	case ConVarType::Vector2:
+		j["default"] = { value->m_vec2Value.x, value->m_vec2Value.y };
 		break;
-	case EConVarType_String:
-		j["default"] = value.m_u64Value ? value.m_szValue : "";
+	case ConVarType::Vector3:
+		j["default"] = { value->m_vec3Value.x, value->m_vec3Value.y, value->m_vec3Value.z };
 		break;
-	case EConVarType_Color:
-		j["default"] = { value.m_clrValue.r(), value.m_clrValue.g(), value.m_clrValue.b(), value.m_clrValue.a() };
+	case ConVarType::Vector4:
+		j["default"] = { value->m_vec4Value.x, value->m_vec4Value.y, value->m_vec4Value.z, value->m_vec4Value.w };
 		break;
-	case EConVarType_Vector2:
-		j["default"] = { value.m_vec2Value.x, value.m_vec2Value.y };
-		break;
-	case EConVarType_Vector3:
-		j["default"] = { value.m_vec3Value.x, value.m_vec3Value.y, value.m_vec3Value.z };
-		break;
-	case EConVarType_Vector4:
-		j["default"] = { value.m_vec4Value.x, value.m_vec4Value.y, value.m_vec4Value.z, value.m_vec4Value.w };
-		break;
-	case EConVarType_Qangle:
-		j["default"] = { value.m_angValue.x, value.m_angValue.y, value.m_angValue.z };
-		break;
+	case ConVarType::Qangle:
+		j["default"] = { value->m_angValue.x, value->m_angValue.y, value->m_angValue.z };
+		break;*/
 	default:
 		j["default"] = "Unknown";
 		break;
@@ -176,7 +177,7 @@ void DumpToJSON(std::string& path)
 
 	do
 	{
-		pCvar = g_pCVar->GetConVar(hCvarHandle);
+		pCvar = Ifaces::cvar->GetConVar(hCvarHandle);
 
 		hCvarHandle.Set(hCvarHandle.Get() + 1);
 
@@ -184,14 +185,14 @@ void DumpToJSON(std::string& path)
 			continue;
 
 		json cvar;
-		cvar["name"] = pCvar->m_pszName;
-		cvar["description"] = pCvar->m_pszHelpString;
+		cvar["name"] = pCvar->GetName();
+		cvar["description"] = pCvar->GetHelpText();
 
 		ValueToJson(pCvar, cvar);
 
 		cvar["type"] = pCvar->m_eVarType;
-		cvar["flags"] = CommandList::PrettifyFlags(static_cast<uint64_t>(pCvar->flags));
-		cvar["flagsRaw"] = static_cast<uint64_t>(pCvar->flags);
+		cvar["flags"] = CommandList::PrettifyFlags(static_cast<uint64_t>(pCvar->GetFlags()));
+		cvar["flagsRaw"] = static_cast<uint64_t>(pCvar->GetFlags());
 		jsonArray.push_back(cvar);
 	} while (pCvar);
 
@@ -231,28 +232,28 @@ void Draw()
 
 		do
 		{
-			pCvar = g_pCVar->GetConVar(hCvarHandle);
+			pCvar = Ifaces::cvar->GetConVar(hCvarHandle);
 
 			hCvarHandle.Set(hCvarHandle.Get() + 1);
 
 			if (!pCvar)
 				continue;
 
-			if (!m_nameFilter.PassFilter(pCvar->m_pszName))
+			if (!m_nameFilter.PassFilter(pCvar->GetName()))
 				continue;
 
 			ImGui::TableNextRow();
 			ImGui::TableNextColumn();
-			ImGui::Text("%s", pCvar->m_pszName);
+			ImGui::Text("%s", pCvar->GetName());
 
 			ImGui::TableNextColumn();
 			ImGui::Text("%s", StringifyValue(pCvar).c_str());
 
 			ImGui::TableNextColumn();
-			ImGui::Text("%s", CommandList::PrettifyFlags(static_cast<uint64_t>(pCvar->flags)).c_str());
+			ImGui::Text("%s", CommandList::PrettifyFlags(static_cast<uint64_t>(pCvar->GetFlags())).c_str());
 
 			ImGui::TableNextColumn();
-			ImGui::Text("%s", pCvar->m_pszHelpString);
+			ImGui::Text("%s", pCvar->GetHelpText());
 
 
 		} while (pCvar);

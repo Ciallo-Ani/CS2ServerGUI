@@ -28,7 +28,6 @@
 
 #include <d3d9.h>
 #include <filesystem>
-#include <platform.h>
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -71,7 +70,7 @@ void InitializeGUI()
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    std::string iniPath = (std::filesystem::path(Plat_GetGameDirectory()) / "csgo/addons/CS2ServerGUI/imgui.ini").string();
+    std::string iniPath = (std::filesystem::path("../../csgo/addons/CS2ServerGUI/imgui.ini").string());
     io.IniFilename = iniPath.c_str();
 
     std::filesystem::path fontPath = std::getenv("WINDIR");

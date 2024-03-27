@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{cec6aeeb-179a-47cc-8d5c-000e950450bc}</ProjectGuid>
+    <RootNamespace>extsample</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>..\..\..\vendor\libmem\lib;C:\Users\Administrator\Desktop\git_work\hl2sdk\lib\public\win64\2015;..\..\..\vendor\v8-google\lib\Release;..\..\..\CS2-SourceMod-Sample\v8pp\lib\Release;..\..\x64\Release;.\vendor\imgui\lib;.\vendor\ImGuiFileDialog\lib;.\vendor\funchook\lib\Release;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>..\..\..\CS2-SourceMod-Sample;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ExternalIncludePath>..\..\..\CS2-SourceMod-Sample;..\..\..\CS2-SourceMod-Sample\v8pp\include;..\..\..\vendor\libmem\include;C:\Users\Administrator\Desktop\git_work\hl2sdk\thirdparty\protobuf-3.21.8\src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</ExternalIncludePath>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libmem.lib;winmm.lib;Dbghelp.lib;v8_monolith.lib;libprotobuf.lib;libprotoc.lib;Source2Mod.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\..\CS2-SourceMod-Sample\sdk;.\;.\vendor;.\vendor\imgui;.\vendor\imgui\backends;.\vendor\ImGuiFileDialog;.\vendor\funchook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>Disabled</Optimization>
+      <OmitFramePointers>false</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libmem.lib;Dbghelp.lib;libprotobuf.lib;Source2Mod.lib;win32_directx9.lib;ImGuiFileDialog.lib;funchook.lib;distorm.lib;d3d9.lib;msvcrtd.lib;psapi.lib</AdditionalDependencies>
+      <EnableUAC>false</EnableUAC>
+      <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy x64\$(ConfigurationName)\$(TargetName).dll "E:\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\source2mod\extensions" /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\bridge\sm_extension.cpp" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_gcmessages.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_usermessages.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cs_usercmd.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\engine_gcmessages.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\gcsdk_gcmessages.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\networkbasetypes.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\network_connection.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\steammessages.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usercmd.pb.cc" />
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usermessages.pb.cc" />
+    <ClCompile Include="config\config.cpp" />
+    <ClCompile Include="imgui\gui.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\actions\actions.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\commandlist\commandlist.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\convarlist\convarlist.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\dumper.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\entitylist\entitylist.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\entitybrowser\entitybrowser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\entitybrowser\type_stringifier.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\eventlogger\eventlogger.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\menubar\menubar.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\playerlist\playerlist.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\stringtables\stringtables.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="server_gui.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\bridge\sm_extension.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_gcmessages.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_usermessages.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cs_usercmd.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\engine_gcmessages.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\gcsdk_gcmessages.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\networkbasetypes.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\network_connection.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\steammessages.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usercmd.pb.h" />
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usermessages.pb.h" />
+    <ClInclude Include="config\config.h" />
+    <ClInclude Include="imgui\gui.h" />
+    <ClInclude Include="imgui\main.h" />
+    <ClInclude Include="imgui\panels\actions\actions.h" />
+    <ClInclude Include="imgui\panels\dumper\commandlist\commandlist.h" />
+    <ClInclude Include="imgui\panels\dumper\convarlist\convarlist.h" />
+    <ClInclude Include="imgui\panels\dumper\dumper.h" />
+    <ClInclude Include="imgui\panels\dumper\entitylist\entitylist.h" />
+    <ClInclude Include="imgui\panels\entitybrowser\entitybrowser.h" />
+    <ClInclude Include="imgui\panels\entitybrowser\type_stringifier.h" />
+    <ClInclude Include="imgui\panels\eventlogger\eventlogger.h" />
+    <ClInclude Include="imgui\panels\menubar\menubar.h" />
+    <ClInclude Include="imgui\panels\playerlist\playerlist.h" />
+    <ClInclude Include="imgui\panels\stringtables\stringtables.h" />
+    <ClInclude Include="interfaces.h" />
+    <ClInclude Include="server_gui.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

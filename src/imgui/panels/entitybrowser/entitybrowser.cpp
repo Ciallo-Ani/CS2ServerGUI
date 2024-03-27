@@ -19,12 +19,12 @@
 
 #include "entitybrowser.h"
 #include <imgui.h>
-#include <schemasystem/schemasystem.h>
-#include <entity2/entitysystem.h>
-#include "cs2_sdk/entity/cbaseentity.h"
 #include "type_stringifier.h"
 #include <format>
 #include <unordered_map>
+#include <sdk/entity/CEntitySystem.h>
+#include <sdk/schemasystem/CSchemaSystem.h>
+#include <sdk/base/CBufferString.h>
 
 namespace GUI::EntityBrowser
 {
@@ -39,6 +39,7 @@ public:
 static MenuContext g_menuContext;
 
 CEntityHandle g_pSelectedEntity;
+
 void DumpEntitySchema(void* pSchemaField, CSchemaClassInfo* pSchema, std::unordered_map<std::string, std::string>& overrideMap, bool root = false);
 void DumpFieldValue(const char* name, void* pSchemaField, CSchemaType* pType, bool wasPtr, std::unordered_map<std::string, std::string>& overrideMap);
 
@@ -68,10 +69,10 @@ void Draw(bool* isOpen)
 
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(0);
-			ImGui::PushID(entity->GetEntityIndex().Get());
+			ImGui::PushID(entity->GetEntityIndex());
 			if (ImGui::Selectable(entity->GetClassname(), false, ImGuiSelectableFlags_SpanAllColumns))
 			{
-				g_pSelectedEntity = entity->GetRefEHandle();
+				entity->GetRefHandle(&g_pSelectedEntity);
 			}
 			ImGui::PopID();
 			ImGui::TableSetColumnIndex(1);
@@ -128,7 +129,7 @@ void DumpEntitySchema(void* pSchemaField, CSchemaClassInfo* pSchema, std::unorde
 
 	ImGui::TableNextRow();
 	ImGui::TableNextColumn();
-	ImGui::TextColored(ImVec4(255, 255, 0, 255), "%s", pSchema->m_pszName);
+	ImGui::TextColored(ImVec4(255, 255, 0, 255), "%s", pSchema->GetName());
 
 	for (int i = 0; i < pSchema->m_nStaticMetadataCount; i++)
 	{

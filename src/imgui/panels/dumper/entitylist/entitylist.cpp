@@ -17,16 +17,15 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <sdk/entity/CGameEntitySystem.h>
+#include <sdk/entity/CEntityClass.h>
 #include "entitylist.h"
 #include "imgui/main.h"
-#include "entity2/entitysystem.h"
 #include "interfaces.h"
 #include <string>
-#include "entity2/entityclass.h"
 #include <imgui.h>
 #include <vector>
 #include <imgui-notify/ImGuiNotify.hpp>
-
 
 namespace GUI::Dumper::EntityList
 {
@@ -58,8 +57,11 @@ void Draw()
 
 	if (entClasses.empty())
 	{
-		FOR_EACH_MAP_FAST(GameEntitySystem()->m_entClassesByClassname, i)
-		{
+		for (int i = 0; i < GameEntitySystem()->m_entClassesByClassname.MaxElement(); ++i) {
+			if (!GameEntitySystem()->m_entClassesByClassname.IsValidIndex(i)) {
+				continue;
+			}
+
 			entClasses.push_back({ GameEntitySystem()->m_entClassesByClassname[i], GameEntitySystem()->m_entClassesByClassname.Key(i)});
 		}
 	}

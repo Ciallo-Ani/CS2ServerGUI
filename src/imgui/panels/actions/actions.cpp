@@ -21,29 +21,30 @@
 #include "imgui/main.h"
 #include "interfaces.h"
 #include <imgui.h>
+#include <sdk/tier0/CCvar.h>
 
 namespace GUI::Actions
 {
 
-static uint64 g_iFlagsToRemove = (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_MISSING0 | FCVAR_MISSING1 | FCVAR_MISSING2 | FCVAR_MISSING3);
+static uint64_t g_iFlagsToRemove = (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_MISSING0 | FCVAR_MISSING1 | FCVAR_MISSING2 | FCVAR_MISSING3);
 
 void Draw()
 {
 	if (ImGui::MenuItem("Unlock all commands"))
 	{
-		if (!Interfaces::icvar)
+		if (!Ifaces::cvar)
 			return;
 
 		int iUnhiddenConCommands = 0;
 
-		ConCommand* pConCommand = nullptr;
-		ConCommand* pInvalidCommand = g_pCVar->GetCommand(ConCommandHandle());
-		ConCommandHandle hConCommandHandle;
+		CConCommand* pConCommand = nullptr;
+		CConCommand* pInvalidCommand = Ifaces::cvar->GetCommand(CConCommandHandle());
+		CConCommandHandle hConCommandHandle;
 		hConCommandHandle.Set(0);
 
 		do
 		{
-			pConCommand = g_pCVar->GetCommand(hConCommandHandle);
+			pConCommand = Ifaces::cvar->GetCommand(hConCommandHandle);
 
 			hConCommandHandle.Set(hConCommandHandle.Get() + 1);
 
@@ -57,7 +58,7 @@ void Draw()
 
 	if (ImGui::MenuItem("Unlock all convars"))
 	{
-		if (!Interfaces::icvar)
+		if (!Ifaces::cvar)
 			return;
 
 		int iUnhiddenConVars = 0;
@@ -69,17 +70,17 @@ void Draw()
 		// Can't use FindFirst/Next here as it would skip cvars with certain flags, so just loop through the handles
 		do
 		{
-			pCvar = g_pCVar->GetConVar(hCvarHandle);
-
+			pCvar = Ifaces::cvar->GetConVar(hCvarHandle);
+			
 			hCvarHandle.Set(hCvarHandle.Get() + 1);
 
 			if (!pCvar)
 				continue;
 
-			if (!(pCvar->flags & g_iFlagsToRemove))
+			if (!(pCvar->m_nFlags & g_iFlagsToRemove))
 				continue;
 
-			pCvar->flags &= ~g_iFlagsToRemove;
+			pCvar->m_nFlags &= ~g_iFlagsToRemove;
 			iUnhiddenConVars++;
 		} while (pCvar);
 	}

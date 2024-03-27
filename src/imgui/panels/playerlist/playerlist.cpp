@@ -20,11 +20,13 @@
 #include "playerlist.h"
 #include "imgui/main.h"
 #include "imgui/panels/entitybrowser/entitybrowser.h"
-#include "cs2_sdk/entity/cbaseplayercontroller.h"
-#include "entity2/entitysystem.h"
 #include "interfaces.h"
 #include <string>
 #include <imgui.h>
+#include <sdk/player/CCSPlayerController.h>
+#include <sdk/CGlobalVars.h>
+#include "playerlist.h"
+#include <sdk/entity/CGameEntitySystem.h>
 
 CGlobalVars* GetGameGlobals();
 
@@ -73,7 +75,7 @@ void Draw(bool* isOpen)
 
 		for (int i = 1; i <= gpGlobals->maxClients; i++)
 		{
-			auto controller = static_cast<CBasePlayerController*>(GameEntitySystem()->GetBaseEntity(CEntityIndex(i)));
+			auto controller = static_cast<CBasePlayerController*>(GameEntitySystem()->GetBaseEntity(i));
 
 			if (!controller)
 				continue;
@@ -84,7 +86,7 @@ void Draw(bool* isOpen)
 			ImGui::Text("%i", i - 1);
 
 			ImGui::TableNextColumn();
-			ImGui::Text("%hu", Interfaces::engine->GetPlayerUserId(CPlayerSlot(i-1)).Get());
+			ImGui::Text("%hu", Ifaces::engine->GetPlayerUserId(i-1));
 
 			ImGui::TableNextColumn();
 			ImGui::PushID(i);

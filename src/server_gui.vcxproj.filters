@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source2Mod SDK">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{acd625ca-a3a5-4ce9-b97b-6f16f40df9f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{7b59049b-a9ab-4faa-9f42-5559d21b4059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels">
+      <UniqueIdentifier>{60b2dd7f-6d5c-45da-95cd-3928a0ac99ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\actions">
+      <UniqueIdentifier>{821a6068-51aa-4a4a-b64d-dc6237cfd075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\dumper">
+      <UniqueIdentifier>{095d3f3c-2f56-4d25-8f0c-e5448215bb76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\entitybrowser">
+      <UniqueIdentifier>{83b197fc-9e0f-484e-9eb2-08b909a0afcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\eventlogger">
+      <UniqueIdentifier>{e6b3029b-4f4b-4407-99fa-e7ed326fd260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\menubar">
+      <UniqueIdentifier>{e1d4a210-848f-48a1-b5da-bee51ebc5ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\playerlist">
+      <UniqueIdentifier>{501bed1d-532f-450a-bee0-fc7ef23ed2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\stringtables">
+      <UniqueIdentifier>{0dbf83e0-0ba2-46f0-bce0-895c2400c80f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\dumper\commandlist">
+      <UniqueIdentifier>{193fcb27-d05f-4b84-8b98-6894cd60d5a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\dumper\convarlist">
+      <UniqueIdentifier>{f5cd0366-e576-40e1-8e7a-989308aa45b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\panels\dumper\entitylist">
+      <UniqueIdentifier>{baec47ab-1c33-42ac-af81-6d97f7ad750e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protobuf">
+      <UniqueIdentifier>{c5f15fe5-4d7b-4418-82a3-61ab62902fdd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\bridge\sm_extension.cpp">
+      <Filter>Source2Mod SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="server_gui.cpp" />
+    <ClCompile Include="config\config.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\gui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\main.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\actions\actions.cpp">
+      <Filter>imgui\panels\actions</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\dumper.cpp">
+      <Filter>imgui\panels\dumper</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\entitylist\entitylist.cpp">
+      <Filter>imgui\panels\dumper\entitylist</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\convarlist\convarlist.cpp">
+      <Filter>imgui\panels\dumper\convarlist</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\dumper\commandlist\commandlist.cpp">
+      <Filter>imgui\panels\dumper\commandlist</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\entitybrowser\entitybrowser.cpp">
+      <Filter>imgui\panels\entitybrowser</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\entitybrowser\type_stringifier.cpp">
+      <Filter>imgui\panels\entitybrowser</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\eventlogger\eventlogger.cpp">
+      <Filter>imgui\panels\eventlogger</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\menubar\menubar.cpp">
+      <Filter>imgui\panels\menubar</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\stringtables\stringtables.cpp">
+      <Filter>imgui\panels\stringtables</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\panels\playerlist\playerlist.cpp">
+      <Filter>imgui\panels\playerlist</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_gcmessages.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_usermessages.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\engine_gcmessages.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\gcsdk_gcmessages.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\network_connection.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\networkbasetypes.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\steammessages.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usercmd.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usermessages.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cs_usercmd.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\bridge\sm_extension.h">
+      <Filter>Source2Mod SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h" />
+    <ClInclude Include="server_gui.h" />
+    <ClInclude Include="config\config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\gui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\main.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\actions\actions.h">
+      <Filter>imgui\panels\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\dumper\dumper.h">
+      <Filter>imgui\panels\dumper</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\dumper\entitylist\entitylist.h">
+      <Filter>imgui\panels\dumper\entitylist</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\dumper\convarlist\convarlist.h">
+      <Filter>imgui\panels\dumper\convarlist</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\dumper\commandlist\commandlist.h">
+      <Filter>imgui\panels\dumper\commandlist</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\entitybrowser\entitybrowser.h">
+      <Filter>imgui\panels\entitybrowser</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\entitybrowser\type_stringifier.h">
+      <Filter>imgui\panels\entitybrowser</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\eventlogger\eventlogger.h">
+      <Filter>imgui\panels\eventlogger</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\menubar\menubar.h">
+      <Filter>imgui\panels\menubar</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\stringtables\stringtables.h">
+      <Filter>imgui\panels\stringtables</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\panels\playerlist\playerlist.h">
+      <Filter>imgui\panels\playerlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_gcmessages.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cstrike15_usermessages.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\engine_gcmessages.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\gcsdk_gcmessages.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\network_connection.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\networkbasetypes.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\steammessages.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usercmd.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\usermessages.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CS2-SourceMod-Sample\sdk\protobuf\cs_usercmd.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

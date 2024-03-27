@@ -17,9 +17,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+class CGameEntitySystem;
+extern CGameEntitySystem* GameEntitySystem();
+
 namespace GUI::Dumper::EntityList
 {
-
 void Draw();
 
 } // namespace GUI::Dumper::EntityList

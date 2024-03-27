@@ -1,0 +1,5 @@
+﻿  Building Custom Rule C:/Users/Administrator/Desktop/git_work/source2sdk/CS2-Plugins-Sample/extensions/server_gui/vendor/ImGuiFileDialog/CMakeLists.txt
+  ImGuiFileDialog.cpp
+C:\Users\Administrator\Desktop\git_work\source2sdk\CS2-Plugins-Sample\extensions\server_gui\vendor\ImGuiFileDialog\ImGuiFileDialog.h(1369,10): error C1083: 无法打开包括文件: “imgui.h”: No such file or directory
+  (编译源文件“../ImGuiFileDialog.cpp”)
+  

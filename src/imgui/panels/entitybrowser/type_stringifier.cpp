@@ -18,10 +18,11 @@
  */
 
 #include "type_stringifier.h"
-#include "schemasystem/schemasystem.h"
-#include <entity2/entitysystem.h>
 #include <format>
 #include <imgui.h>
+#include <sdk/entity/CEntityInstance.h>
+#include <sdk/schemasystem/schematypes.h>
+#include <sdk/mathlib/vector2d.h>
 
 namespace GUI::EntityBrowser
 {
@@ -93,7 +94,7 @@ void DumpAtomicBasicValue(void* value, CSchemaType_Atomic* pType, const char* fi
 	if (!strcmp(pType->m_pAtomicInfo->m_pszName1, "Color"))
 	{
 		auto& color = *static_cast<Color*>(value);
-		auto imColor = ImVec4(color.r() / 255.0f, color.g() / 255.0f, color.b() / 255.0f, color.a() / 255.0f);
+		auto imColor = ImVec4(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
 		ImGui::ColorEdit4("color", (float*)&imColor, ImGuiColorEditFlags_NoOptions | ImGuiColorEditFlags_InputRGB);
 		return;
 	}
@@ -116,11 +117,11 @@ void DumpAtomicBasicValue(void* value, CSchemaType_Atomic* pType, const char* fi
 
 	if (!strcmp(pType->m_pAtomicInfo->m_pszName1, "CEntityIndex"))
 	{
-		auto& index = *static_cast<CEntityIndex*>(value);
+		auto index = *static_cast<int32_t*>(value);
 		auto entity = GameEntitySystem()->GetEntityInstance(index);
 		if (entity)
 		{
-			if (ImGui::SmallButton(std::format("{} ({})##{}", entity->GetClassname(), index.Get(), fieldName).c_str()))
+			if (ImGui::SmallButton(std::format("{} ({})##{}", entity->GetClassname(), index, fieldName).c_str()))
 				EntityBrowser::g_pSelectedEntity = entity->GetRefEHandle();
 		}
 		else

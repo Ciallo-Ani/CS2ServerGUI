@@ -17,7 +17,7 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "entityhandle.h"
+#include <sdk/entity/CEntityInstance.h>
 
 namespace GUI::EntityBrowser
 {

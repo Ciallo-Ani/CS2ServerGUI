@@ -19,11 +19,12 @@
 
 #include "eventlogger.h"
 #include "imgui/main.h"
-#include "entity2/entitysystem.h"
 #include "interfaces.h"
 #include <string>
 #include <imgui.h>
 #include <vector>
+#include <map>
+#include <Mutex>
 
 namespace GUI::EventLogger
 {

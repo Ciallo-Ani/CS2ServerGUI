@@ -20,12 +20,11 @@
 #include "stringtables.h"
 #include "imgui/main.h"
 #include "imgui/panels/entitybrowser/entitybrowser.h"
-#include "cs2_sdk/entity/cbaseplayercontroller.h"
-#include "entity2/entitysystem.h"
 #include "interfaces.h"
 #include <string>
-#include "networkstringtabledefs.h"
 #include <imgui.h>
+#include <sdk/player/CCSPlayerController.h>
+#include <sdk/networkstringtabledefs.h>
 
 namespace GUI::StringTables
 {
@@ -35,7 +34,7 @@ void Draw(bool* isOpen)
 	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
 	ImGui::Begin("String Tables", isOpen);
 
-	int num = Interfaces::networkStringTableContainerServer->GetNumTables();
+	int num = Ifaces::networkStringTableContainerServer->GetNumTables();
 
 	if (ImGui::BeginTable("Players", 3))
 	{
@@ -47,7 +46,7 @@ void Draw(bool* isOpen)
 		for (int i = 0; i < num; i++)
 		{
 			ImGui::PushID(i);
-			auto table = Interfaces::networkStringTableContainerServer->GetTable(i);
+			auto table = Ifaces::networkStringTableContainerServer->GetTable(i);
 
 			if (!table)
 				continue;

@@ -25,7 +25,8 @@
 #include <vector>
 #include <imgui-notify/ImGuiNotify.hpp>
 #include <ImGuiFileDialog.h>
-#include <nlohmann/json.hpp>
+#include <tools/json.h>
+#include <sdk/tier0/CCvar.h>
 
 #define FCVAR_MISSING5	((uint64_t)1<<(uint64_t)30)
 #define FCVAR_MISSING6	((uint64_t)1<<(uint64_t)31)
@@ -112,14 +113,14 @@ std::string PrettifyFlags(uint64_t flags)
 void DumpToJSON(std::string& path)
 {
 	json jsonArray;
-	ConCommand* pConCommand = nullptr;
-	ConCommand* pInvalidCommand = g_pCVar->GetCommand(ConCommandHandle());
-	ConCommandHandle hConCommandHandle;
+	CConCommand* pConCommand = nullptr;
+	CConCommand* pInvalidCommand = Ifaces::cvar->GetCommand(CConCommandHandle());
+	CConCommandHandle hConCommandHandle;
 	hConCommandHandle.Set(0);
 
 	do
 	{
-		pConCommand = g_pCVar->GetCommand(hConCommandHandle);
+		pConCommand = Ifaces::cvar->GetCommand(hConCommandHandle);
 
 		hConCommandHandle.Set(hConCommandHandle.Get() + 1);
 
@@ -163,14 +164,14 @@ void Draw()
 		ImGui::TableSetupColumn("Description");
 		ImGui::TableHeadersRow();
 
-		ConCommand* pConCommand = nullptr;
-		ConCommand* pInvalidCommand = g_pCVar->GetCommand(ConCommandHandle());
-		ConCommandHandle hConCommandHandle;
+		CConCommand* pConCommand = nullptr;
+		CConCommand* pInvalidCommand = Ifaces::cvar->GetCommand(CConCommandHandle());
+		CConCommandHandle hConCommandHandle;
 		hConCommandHandle.Set(0);
 
 		do
 		{
-			pConCommand = g_pCVar->GetCommand(hConCommandHandle);
+			pConCommand = Ifaces::cvar->GetCommand(hConCommandHandle);
 
 			hConCommandHandle.Set(hConCommandHandle.Get() + 1);
 

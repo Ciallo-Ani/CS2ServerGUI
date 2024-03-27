@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Administrator\Desktop\git_work\source2sdk\CS2-Plugins-Sample\extensions\server_gui\vendor\ImGuiFileDialog\build\CMakeFiles\249e2128e234ea673e0426bb3c4cb072\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2DD7D523-42A3-356D-A6A4-ABB9D4C405CE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

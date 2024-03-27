@@ -1,7 +1,8 @@
 #include "config.h"
-#include <nlohmann/json.hpp>
+#include <tools/json.h>
 #include <fstream>
 #include <tier0/dbg.h>
+#include <core/sm_log.h>
 
 using json = nlohmann::json;
 
@@ -22,7 +23,7 @@ void PluginConfig::LoadConfig()
 	}
 	catch (const std::exception& e)
 	{
-		ConMsg("Exception: %s", e.what());
+		Logger()->PrintToConsole("Exception: %s", e.what());
 	}
 }
 void PluginConfig::SaveConfig()

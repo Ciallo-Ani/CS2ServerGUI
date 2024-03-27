@@ -17,9 +17,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+class CGameEntitySystem;
+extern CGameEntitySystem* GameEntitySystem();
+
 namespace GUI::PlayerList
 {
-
-void Draw(bool* isOpen);
+	void Draw(bool* isOpen);
 
 } // namespace GUI::PlayerList
