@@ -25,14 +25,23 @@
 #include <imgui.h>
 #include <sdk/player/CCSPlayerController.h>
 #include <sdk/networkstringtabledefs.h>
+#include <iostream>
 
 namespace GUI::StringTables
 {
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(380, 435), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(475, 425), ImGuiCond_FirstUseEver);
 	ImGui::Begin("String Tables", isOpen);
+	/*if (ImGui::Button("Check")) {
+		auto winSize = ImGui::GetWindowSize();
+		std::cout << "WindowSize: " << winSize.x << " | " << winSize.y << std::endl;
+
+		auto winPos = ImGui::GetWindowPos();
+		std::cout << "WindowPos: " << winPos.x << " | " << winPos.y << std::endl;
+	}*/
 
 	int num = Ifaces::networkStringTableContainerServer->GetNumTables();
 

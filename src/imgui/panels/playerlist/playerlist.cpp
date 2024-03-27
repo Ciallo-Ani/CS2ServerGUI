@@ -57,8 +57,16 @@ std::string ConnectStateToString(PlayerConnectedState connectState)
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(380, 400), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(475, 20), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Player List", isOpen);
+	/*if (ImGui::Button("Check")) {
+		auto winSize = ImGui::GetWindowSize();
+		std::cout << "WindowSize: " << winSize.x << " | " << winSize.y << std::endl;
+
+		auto winPos = ImGui::GetWindowPos();
+		std::cout << "WindowPos: " << winPos.x << " | " << winPos.y << std::endl;
+	}*/
 
 	if (ImGui::BeginTable("Players", 5))
 	{

@@ -24,12 +24,12 @@ namespace GUI
 
 struct WindowStates
 {
-	bool m_bEntityBrowser = true;
-	bool m_bPlayerList = false;
-	bool m_bStringTables = false;
-	bool m_bDumper = false;
 	bool m_bDemoWindow = false;
-	bool m_bEventLogger = false;
+	bool m_bEntityBrowser = true;
+	bool m_bPlayerList = true;
+	bool m_bStringTables = true;
+	bool m_bDumper = true;
+	bool m_bEventLogger = true;
 };
 
 class GUICtx

@@ -45,7 +45,8 @@ void DumpFieldValue(const char* name, void* pSchemaField, CSchemaType* pType, bo
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(470, 840), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Entity Browser", isOpen);
 
 	int availableHeight = ImGui::GetWindowSize().y - 50;

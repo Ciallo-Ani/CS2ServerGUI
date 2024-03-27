@@ -26,6 +26,7 @@
 #include <string>
 #include <imgui.h>
 #include <vector>
+#include <iostream>
 
 
 namespace GUI::Dumper
@@ -33,8 +34,16 @@ namespace GUI::Dumper
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(720, 400), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(860, 20), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Dumper", isOpen);
+	/*if (ImGui::Button("Check")) {
+		auto winSize = ImGui::GetWindowSize();
+		std::cout << "WindowSize: " << winSize.x << " | " << winSize.y << std::endl;
+
+		auto winPos = ImGui::GetWindowPos();
+		std::cout << "WindowPos: " << winPos.x << " | " << winPos.y << std::endl;
+	}*/
 
 	if (ImGui::BeginTabBar("DumperTabs"))
 	{

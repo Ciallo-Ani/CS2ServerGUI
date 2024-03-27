@@ -159,9 +159,9 @@ void Draw()
 
 	if (ImGui::BeginTable("Command List", 3, ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg))
 	{
-		ImGui::TableSetupColumn("Name");
-		ImGui::TableSetupColumn("Flags");
-		ImGui::TableSetupColumn("Description");
+		ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthFixed, 200.f);
+		ImGui::TableSetupColumn("Flags", ImGuiTableColumnFlags_WidthFixed, 70.f);
+		ImGui::TableSetupColumn("Description", ImGuiTableColumnFlags_WidthFixed, 420.f);
 		ImGui::TableHeadersRow();
 
 		CConCommand* pConCommand = nullptr;

@@ -25,6 +25,7 @@
 #include <vector>
 #include <map>
 #include <Mutex>
+#include <iostream>
 
 namespace GUI::EventLogger
 {
@@ -112,8 +113,16 @@ void DrawTable(bool ingress)
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(720, 435), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(860, 425), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Event Logger", isOpen);
+	/*if (ImGui::Button("Check")) {
+		auto winSize = ImGui::GetWindowSize();
+		std::cout << "WindowSize: " << winSize.x << " | " << winSize.y << std::endl;
+
+		auto winPos = ImGui::GetWindowPos();
+		std::cout << "WindowPos: " << winPos.x << " | " << winPos.y << std::endl;
+	}*/
 
 	int availableHeight = ImGui::GetWindowSize().y - 50;
 

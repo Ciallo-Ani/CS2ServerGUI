@@ -220,10 +220,10 @@ void Draw()
 
 	if (ImGui::BeginTable("Convar List", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg))
 	{
-		ImGui::TableSetupColumn("Name");
-		ImGui::TableSetupColumn("Default Value");
-		ImGui::TableSetupColumn("Flags");
-		ImGui::TableSetupColumn("Description");
+		ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthFixed, 200.f);
+		ImGui::TableSetupColumn("Default Value", ImGuiTableColumnFlags_WidthFixed, 40.f);
+		ImGui::TableSetupColumn("Flags", ImGuiTableColumnFlags_WidthFixed, 70.f);
+		ImGui::TableSetupColumn("Description", ImGuiTableColumnFlags_WidthFixed, 380.f);
 		ImGui::TableHeadersRow();
 
 		ConVar* pCvar = nullptr;
