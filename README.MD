@@ -1,3 +1,4 @@
+```
 class INetworkMessageProcessingPreFilter {
 	virtual void FilterMessages() = 0;
 };
@@ -37,3 +38,4 @@ public:
 }; // Size: 328
 #pragma pack(pop)
 static_assert(sizeof(CServerSideClientBase) == 328);
+```
