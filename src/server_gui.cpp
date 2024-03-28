@@ -27,6 +27,7 @@ std::thread g_thread;
 
 typedef bool (*FilterMessage_t)(CServerSideClientBase* player, INetworkSerializable* pEvent, void* pData, void* pNetChan);
 FilterMessage_t g_pFilterMessage = nullptr;
+funchook_t* g_pHookFilterMessage = nullptr;
 
 CON_COMMAND(gui, "Opens server GUI", FCVAR_LINKED_CONCOMMAND | FCVAR_SPONLY | FCVAR_SERVER_CAN_EXECUTE)
 {
@@ -74,11 +75,9 @@ bool ReadPBFromBuffer(bf_read& buffer, T& pb)
 	return true;
 }
 
-void* g_pFilterMessage_Trampoline = nullptr;
 bool Detour_FilterMessage(CServerSideClientBase* player, INetworkSerializable* pEvent, void* pData, void* pNetChan) {
 	if (!GUI::g_GUICtx.m_WindowStates.m_bEventLogger)
 		return g_pFilterMessage(player, pEvent, pData, pNetChan);
-		//return SDKCall<bool>(g_pFilterMessage_Trampoline, player, pEvent, pData, pNetChan);
 
 	NetMessageInfo_t* info = pEvent->GetNetMessageInfo();
 	if (info)
@@ -108,7 +107,6 @@ bool Detour_FilterMessage(CServerSideClientBase* player, INetworkSerializable* p
 	}
 
 	return g_pFilterMessage(player, pEvent, pData, pNetChan);
-	//return SDKCall<bool>(g_pFilterMessage_Trampoline, player, pEvent, pData, pNetChan);
 }
 
 void Hook_PostEvent(CGameEventSystem* pThis, CSplitScreenSlot nSlot, bool bLocalOnly, int nClientCount, const uint64* clients,
@@ -126,7 +124,7 @@ void Hook_PostEvent(CGameEventSystem* pThis, CSplitScreenSlot nSlot, bool bLocal
 	}
 }
 
-void SetupInterfaces() {
+bool SetupInterfaces() {
 	Ifaces::eventSystem = Interfaces()->GetFactory<CGameEventSystem*>("engine2.dll", "GameEventSystemServerV001");
 	Ifaces::engine = Interfaces()->GetFactory<CEngineServer*>("engine2.dll", "Source2EngineToServer001");
 	Ifaces::cvar = Interfaces()->GetFactory<CCVar*>("tier0.dll", "VEngineCvar007");
@@ -137,22 +135,23 @@ void SetupInterfaces() {
 
 	//GET_V_IFACE_ANY(GetServerFactory, Ifacesgameclients, IServerGameClients, INTERFACEVERSION_SERVERGAMECLIENTS);
 	//GET_V_IFACE_CURRENT(GetEngineFactory, g_pGameResourceServiceServer, IGameResourceServiceServer, GAMERESOURCESERVICESERVER_INTERFACE_VERSION);
+
+	return true;
 }
 
-void SetupHook()
+bool SetupHook()
 {
 	const char* engineModule = "engine2" MODULE_EXT;
 	const char Sig_FilterMessage[] = "40 53 48 83 EC 30 48 3B 15 ? ? ? ? 48 8B D9";
 	g_pFilterMessage = (FilterMessage_t)libmem::SignScan(Sig_FilterMessage, engineModule);
 	if (!g_pFilterMessage) {
-		Logger()->PrintToConsole("Failed to find signature \'ServerGUI::g_pFilterMessage\'");
-		return;
+		Logger()->PrintToConsole("Failed to find signature \'ServerGUI::g_pFilterMessage\'\n");
+		return false;
 	}
-	auto g_pHook = funchook_create();
-	funchook_prepare(g_pHook, (void**)&g_pFilterMessage, (void*)Detour_FilterMessage);
-	funchook_install(g_pHook, 0);
 
-	//libmem::HookFunc(g_pFilterMessage, Detour_FilterMessage, g_pFilterMessage_Trampoline);
+	g_pHookFilterMessage = funchook_create();
+	funchook_prepare(g_pHookFilterMessage, (void**)&g_pFilterMessage, (void*)Detour_FilterMessage);
+	funchook_install(g_pHookFilterMessage, 0);
 
 	vmt::SetVMethod(16, Ifaces::eventSystem, Hook_PostEvent);
 }
@@ -175,16 +174,21 @@ bool ServerGUI::OnLoad() {
 	m_config.SetPath((std::filesystem::path("../../csgo/addons/CS2ServerGUI/config.json")));
 	m_config.LoadConfig();
 
-	SetupInterfaces();
-	SetupHook();
+	if (!SetupInterfaces()) {
+		return false;
+	}
 
-	// InitializeGUI on another thread
-	//g_thread = std::thread(GUI::InitializeGUI);
-	//g_thread.detach();
+	if (!SetupHook()) {
+		return false;
+	}
+
 	return true;
 }
 
 void ServerGUI::OnUnload() {
+	Logger()->PrintToConsole("on unload\n");
+	funchook_uninstall(g_pHookFilterMessage, 0);
+	funchook_destroy(g_pHookFilterMessage);
 }
 
 void ServerGUI::OnAllLoaded() {
