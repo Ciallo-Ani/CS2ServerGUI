@@ -171,10 +171,15 @@ CGlobalVars* GetGameGlobals()
 }
 
 bool ServerGUI::OnLoad() {
-	m_config.SetPath((std::filesystem::path("../../csgo/addons/CS2ServerGUI/config.json")));
-	m_config.LoadConfig();
+	const std::filesystem::path path("../../csgo/addons/source2mod/configs/server_gui/config.json");
+	m_config.SetPath(path);
+	if (!m_config.LoadConfig()) {
+		Logger()->PrintToConsole("Failed to get config from \'%s\'", path.c_str());
+		return false;
+	}
 
 	if (!SetupInterfaces()) {
+		Logger()->PrintToConsole("Failed to get interface.");
 		return false;
 	}
 
@@ -186,7 +191,6 @@ bool ServerGUI::OnLoad() {
 }
 
 void ServerGUI::OnUnload() {
-	Logger()->PrintToConsole("on unload\n");
 	funchook_uninstall(g_pHookFilterMessage, 0);
 	funchook_destroy(g_pHookFilterMessage);
 }

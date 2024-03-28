@@ -20,6 +20,7 @@
 #include "dumper.h"
 #include "imgui/main.h"
 #include "interfaces.h"
+#include "server_gui.h"
 #include "entitylist/entitylist.h"
 #include "convarlist/convarlist.h"
 #include "commandlist/commandlist.h"
@@ -34,8 +35,12 @@ namespace GUI::Dumper
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(720, 400), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowPos(ImVec2(860, 20), ImGuiCond_FirstUseEver);
+	const json& config = g_ServerGUI.m_config.GetConfig();
+	const json::array_t& size = config["dumper"]["init_size"];
+	const json::array_t& pos = config["dumper"]["init_pos"];
+
+	ImGui::SetNextWindowSize(ImVec2(size[0], size[1]), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(pos[0], pos[1]), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Dumper", isOpen);
 	/*if (ImGui::Button("Check")) {
 		auto winSize = ImGui::GetWindowSize();

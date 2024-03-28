@@ -1,0 +1,32 @@
+{
+    "server_gui": {
+        "main_window": {
+            "resolusion": [1600, 900]
+        },
+        "entity": {
+            "start_enabled": true,
+            "init_size": [470, 840],
+            "init_pos": [0, 20]
+        },
+        "playerlist": {
+            "start_enabled": true,
+            "init_size": [380, 400],
+            "init_pos": [475, 20]
+        },
+        "stringtable": {
+            "start_enabled": true,
+            "init_size": [380, 435],
+            "init_pos": [475, 425]
+        },
+        "dumper": {
+            "start_enabled": true,
+            "init_size": [720, 400],
+            "init_pos": [860, 20]
+        }, 
+        "eventlogger": {
+            "start_enabled": true,
+            "init_size": [720, 435],
+            "init_pos": [860, 425]
+        }
+    }
+}

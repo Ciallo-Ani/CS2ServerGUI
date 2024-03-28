@@ -20,6 +20,7 @@
 #include "eventlogger.h"
 #include "imgui/main.h"
 #include "interfaces.h"
+#include "server_gui.h"
 #include <string>
 #include <imgui.h>
 #include <vector>
@@ -113,8 +114,12 @@ void DrawTable(bool ingress)
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(720, 435), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowPos(ImVec2(860, 425), ImGuiCond_FirstUseEver);
+	const json& config = g_ServerGUI.m_config.GetConfig();
+	const json::array_t& size = config["eventlogger"]["init_size"];
+	const json::array_t& pos = config["eventlogger"]["init_pos"];
+
+	ImGui::SetNextWindowSize(ImVec2(size[0], size[1]), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(pos[0], pos[1]), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Event Logger", isOpen);
 	/*if (ImGui::Button("Check")) {
 		auto winSize = ImGui::GetWindowSize();

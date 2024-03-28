@@ -18,6 +18,7 @@
  */
 
 #include "entitybrowser.h"
+#include "server_gui.h"
 #include <imgui.h>
 #include "type_stringifier.h"
 #include <format>
@@ -45,8 +46,12 @@ void DumpFieldValue(const char* name, void* pSchemaField, CSchemaType* pType, bo
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(470, 840), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiCond_FirstUseEver);
+	const json& config = g_ServerGUI.m_config.GetConfig();
+	const json::array_t& size = config["entity"]["init_size"];
+	const json::array_t& pos = config["entity"]["init_pos"];
+
+	ImGui::SetNextWindowSize(ImVec2(size[0], size[1]), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(pos[0], pos[1]), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Entity Browser", isOpen);
 
 	int availableHeight = ImGui::GetWindowSize().y - 50;

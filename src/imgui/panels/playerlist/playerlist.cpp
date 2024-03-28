@@ -21,6 +21,7 @@
 #include "imgui/main.h"
 #include "imgui/panels/entitybrowser/entitybrowser.h"
 #include "interfaces.h"
+#include "server_gui.h"
 #include <string>
 #include <imgui.h>
 #include <sdk/player/CCSPlayerController.h>
@@ -57,8 +58,12 @@ std::string ConnectStateToString(PlayerConnectedState connectState)
 
 void Draw(bool* isOpen)
 {
-	ImGui::SetNextWindowSize(ImVec2(380, 400), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowPos(ImVec2(475, 20), ImGuiCond_FirstUseEver);
+	const json& config = g_ServerGUI.m_config.GetConfig();
+	const json::array_t& size = config["playerlist"]["init_size"];
+	const json::array_t& pos = config["playerlist"]["init_pos"];
+
+	ImGui::SetNextWindowSize(ImVec2(size[0], size[1]), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowPos(ImVec2(pos[0], pos[1]), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Player List", isOpen);
 	/*if (ImGui::Button("Check")) {
 		auto winSize = ImGui::GetWindowSize();

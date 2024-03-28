@@ -19,6 +19,7 @@
 
 #include "main.h"
 #include "gui.h"
+#include "server_gui.h"
 
 #include <imgui.h>
 #include <imgui_impl_dx9.h>
@@ -47,10 +48,19 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 void InitializeGUI()
 {
+    const auto& config = g_ServerGUI.m_config.GetConfig();
+
+    g_GUICtx.m_WindowStates.m_bEntityBrowser = (json::boolean_t)config["entity"]["start_enabled"];
+    g_GUICtx.m_WindowStates.m_bPlayerList    = (json::boolean_t)config["playerlist"]["start_enabled"];
+    g_GUICtx.m_WindowStates.m_bStringTables  = (json::boolean_t)config["stringtable"]["start_enabled"];
+    g_GUICtx.m_WindowStates.m_bDumper        = (json::boolean_t)config["dumper"]["start_enabled"];
+    g_GUICtx.m_WindowStates.m_bEventLogger   = (json::boolean_t)config["eventlogger"]["start_enabled"];
     g_GUICtx.m_bIsGUIOpen = true;
+
+    const json::array_t& resolution = config["main_window"]["resolusion"];
     WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(nullptr), nullptr, nullptr, nullptr, nullptr, L"CS2ServerGUI", nullptr };
     ::RegisterClassExW(&wc);
-    HWND hwnd = ::CreateWindowW(wc.lpszClassName, L"CS2ServerGUI", WS_OVERLAPPEDWINDOW, 100, 100, 1600, 900, nullptr, nullptr, wc.hInstance, nullptr);
+    HWND hwnd = ::CreateWindowW(wc.lpszClassName, L"CS2ServerGUI", WS_OVERLAPPEDWINDOW, 100, 100, resolution[0], resolution[1], nullptr, nullptr, wc.hInstance, nullptr);
 
     // Initialize Direct3D
     if (!CreateDeviceD3D(hwnd))
@@ -71,7 +81,7 @@ void InitializeGUI()
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
     std::string iniPath = (std::filesystem::path("../../csgo/addons/CS2ServerGUI/imgui.ini").string());
-    io.IniFilename = iniPath.c_str();
+    io.IniFilename = iniPath.c_str(); // ?
 
     std::filesystem::path fontPath = std::getenv("WINDIR");
     fontPath /= "Fonts";
@@ -143,6 +153,8 @@ void InitializeGUI()
         g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
         g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
         g_pd3dDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
+
+        // TODO: custom rgba
         D3DCOLOR clear_col_dx = D3DCOLOR_RGBA((int)(clear_color.x * clear_color.w * 255.0f), (int)(clear_color.y * clear_color.w * 255.0f), (int)(clear_color.z * clear_color.w * 255.0f), (int)(clear_color.w * 255.0f));
         g_pd3dDevice->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, clear_col_dx, 1.0f, 0);
         if (g_pd3dDevice->BeginScene() >= 0)
